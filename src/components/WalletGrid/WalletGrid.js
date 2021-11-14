@@ -2,7 +2,7 @@ import React from "react";
 
 import Wallet from "../WalletContainer/WalletContainer";
 
-import { GrAdd } from "react-icons/gr";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import { useSelector, useDispatch } from "react-redux";
 import { createNewWallet } from "../../reducers/walletReducer";
@@ -34,7 +34,7 @@ const WalletGrid = () => {
         <label htmlFor="name">nombre de cartera</label>
         <input type="text" name="name" autoComplete="off" />
         <button>
-          <GrAdd />
+          <AiOutlinePlus />
           Crear cartera
         </button>
       </FormNewWallet>
