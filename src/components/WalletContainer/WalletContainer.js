@@ -11,7 +11,6 @@ import {
   Asset,
   AssetAmount,
   AssetImage,
-  AssetName,
   Assets,
 } from "./WalletContainer.elements";
 import Price from "../Atoms/Price";
