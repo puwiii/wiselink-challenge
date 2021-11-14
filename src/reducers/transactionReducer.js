@@ -4,6 +4,12 @@ export const transactionReducer = (state = [], action) => {
       return [action.payload, ...state];
     }
 
+    case "@transaction/remove": {
+      return state.filter((transaction) => {
+        return transaction.id !== action.payload.transactionId;
+      });
+    }
+
     default:
       return state;
   }
@@ -26,4 +32,9 @@ export const createTransaction = (walletId, type, coin, amount, price) => ({
     price: price,
     date: Date.now(),
   },
+});
+
+export const removeTransaction = (transactionId) => ({
+  type: "@transaction/remove",
+  payload: { transactionId },
 });
