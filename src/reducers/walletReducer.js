@@ -3,6 +3,12 @@ export const walletReducer = (state = [], action) => {
     case "@wallet/create":
       return [...state, action.payload];
 
+    case "@wallet/remove": {
+      return state.filter((wallet) => {
+        return wallet.id !== action.payload.walletId;
+      });
+    }
+
     case "@wallet/addAsset": {
       const { payloadAsset, walletId } = action.payload;
       return state.map((wallet) => {
@@ -66,6 +72,11 @@ export const createNewWallet = (name) => ({
     value: 0,
     assets: [],
   },
+});
+
+export const removeWallet = (walletId) => ({
+  type: "@wallet/remove",
+  payload: { walletId },
 });
 
 export const addAssetToWallet = (walletId, asset, amount) => ({
