@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import Price from "../../Atoms/Price";
 import NoData from "../../Atoms/NoData";
 
-import { GrTransaction, GrFormNext } from "react-icons/gr";
+import { AiOutlineSwap, AiOutlineRight } from "react-icons/ai";
 
 import DocumentSVG from "../../svg/DocumentsSVG";
 import CryptoWorldSVG from "../../svg/CryptoWorldSVG";
@@ -32,6 +32,7 @@ import axios from "axios";
 import { requests } from "../../../requests";
 import AddTransactionForm from "../../AddTransactionForm/AddTransactionForm";
 import Transaction from "../../Transaction/Transaction";
+import Spinner from "../../Spinner";
 
 const Wallet = () => {
   const { id } = useParams();
@@ -41,7 +42,7 @@ const Wallet = () => {
   const [balance, setBalance] = useState(0);
   const [assets, setAssets] = useState(undefined);
   const [showTransaction, setShowTransaction] = useState(false);
-
+  const [assetsLoading, setAssetsLoading] = useState(false);
   const wallets = useSelector((state) => state.wallets);
   const transactionsState = useSelector((state) => state.transactions);
 
@@ -50,6 +51,7 @@ const Wallet = () => {
       const findedWallet = wallets.find((wallet) => wallet.id === id);
       findedWallet ? setWallet(findedWallet) : setWallet(null);
 
+      setAssetsLoading(true);
       //finding assets values from API
 
       if (findedWallet) {
@@ -71,6 +73,7 @@ const Wallet = () => {
           });
 
           setBalance(balanceAcum);
+          setAssetsLoading(false);
         });
       }
     } else {
@@ -107,12 +110,13 @@ const Wallet = () => {
                   setShowTransaction(true);
                 }}
               >
-                <GrTransaction />
+                <AiOutlineSwap />
                 Realizar Transferencia
               </NewTransaction>
             </Header>
 
             <Subtitle>Activos</Subtitle>
+            {assetsLoading && <Spinner />}
             {assets?.length === 0 && (
               <NoData>
                 <CryptoWorldSVG width={150} />
@@ -120,7 +124,7 @@ const Wallet = () => {
               </NoData>
             )}
             <Assets>
-              {assets ? (
+              {assets &&
                 assets.map((asset) => (
                   <AssetItem key={asset.id}>
                     <Cryptocurrency
@@ -139,10 +143,7 @@ const Wallet = () => {
                       <Price price={asset.amount * asset.current_price} />
                     </AssetInfo>
                   </AssetItem>
-                ))
-              ) : (
-                <span>cargando monedas</span>
-              )}
+                ))}
             </Assets>
 
             <Transactions>
@@ -150,7 +151,7 @@ const Wallet = () => {
               {transactions?.length === 0 && (
                 <NoData>
                   <DocumentSVG width={150} />
-                  No existe ninguna transferencia
+                  No existe ninguna transacción
                 </NoData>
               )}
               {transactions?.map((transaction) => (
@@ -168,13 +169,15 @@ const Wallet = () => {
           </WalletMain>
           <WalletAside show={showTransaction}>
             <CloseAside onClick={() => setShowTransaction(false)}>
-              <GrFormNext />
+              <AiOutlineRight /> Cerrar
             </CloseAside>
             <AddTransactionForm idWallet={wallet.id} coinsToSell={assets} />
           </WalletAside>
         </>
       ) : wallet === undefined ? (
-        <SpinnerContainer>Cargando...</SpinnerContainer>
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
       ) : (
         <Title>Wallet no encontrada</Title>
       )}

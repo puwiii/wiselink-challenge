@@ -14,7 +14,15 @@ const reducer = combineReducers({
   transactions: transactionReducer,
 });
 
-const store = createStore(reducer, composeWithDevTools());
+const persistedState = localStorage.getItem("reduxState")
+  ? JSON.parse(localStorage.getItem("reduxState"))
+  : {};
+
+const store = createStore(reducer, persistedState, composeWithDevTools());
+
+store.subscribe(() => {
+  localStorage.setItem("reduxState", JSON.stringify(store.getState()));
+});
 
 ReactDOM.render(
   <React.StrictMode>

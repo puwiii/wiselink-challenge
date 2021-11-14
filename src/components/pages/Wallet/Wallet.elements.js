@@ -7,6 +7,7 @@ export const WalletPage = styled.main`
 
 export const SpinnerContainer = styled.main`
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,8 +16,9 @@ export const SpinnerContainer = styled.main`
 export const WalletAside = styled.aside`
   display: flex;
   flex-direction: column;
+  gap: 2em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: ${({ show }) => show && "3em 2em"};
+  padding: ${({ show }) => show && "3.2em 2em"};
   max-width: ${({ show }) => (show ? "300px" : "0")};
   background: #fefefe;
 `;
@@ -109,10 +111,7 @@ export const AssetAmount = styled.p`
   }
 `;
 
-export const CloseAside = styled.span`
-  display: inline;
-  cursor: pointer;
-  font-size: 2rem;
+export const CloseAside = styled.button`
   align-self: flex-start;
 `;
 

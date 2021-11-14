@@ -3,6 +3,11 @@
   font-size: 0.9rem;
   overflow-x: hidden;
 }
+@media screen and (max-width: 768px) {
+  .App {
+    padding-bottom: 50px;
+  }
+}
 
 *,
 *::before,
@@ -34,8 +39,15 @@ button {
   outline: none;
   border: none;
   padding: 0.87em 1.1em;
-  background-color: #28517722;
+  background-color: #285177;
+  color: #fff;
   transition: all 125ms linear;
+  font-weight: 600;
+  font-size: 0.67rem;
+}
+
+button > svg {
+  font-size: 1.1rem;
 }
 
 button:hover {
@@ -61,6 +73,7 @@ input {
 
 label {
   font-weight: 600;
+  font-size: 0.67rem;
   opacity: 0.5;
   align-self: flex-start;
 }
@@ -72,7 +85,7 @@ h1 {
   letter-spacing: -0.2px;
 }
 
-@media screen and (min-width: 425px) {
+/* @media screen and (min-width: 425px) {
   ::-webkit-scrollbar-thumb {
     width: 5px;
     border-radius: 500px;
@@ -94,4 +107,4 @@ h1 {
   ::-webkit-scrollbar-track {
     background: transparent;
   }
-}
+} */

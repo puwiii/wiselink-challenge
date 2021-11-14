@@ -15,6 +15,7 @@ export const FormNewWallet = styled.form`
   padding: 1em;
 
   & > button {
+    color: #fff;
     align-self: flex-end;
   }
 `;
