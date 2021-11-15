@@ -2,6 +2,8 @@
 
 ## Available Scripts
 
+If you want to, you can go to [http://wiselink-challenge-sebastian-mathieur.vercel.app/](http://wiselink-challenge-sebastian-mathieur.vercel.app/) to use the app
+
 In the project directory, you can run:
 
 ### `npm start`
