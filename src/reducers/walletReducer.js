@@ -9,6 +9,18 @@ export const walletReducer = (state = [], action) => {
       });
     }
 
+    case "@wallet/updateName": {
+      const { newName, walletId } = action.payload;
+
+      return state.map((wallet) => {
+        if (wallet.id === walletId) {
+          return { ...wallet, name: newName };
+        } else {
+          return { ...wallet };
+        }
+      });
+    }
+
     case "@wallet/addAsset": {
       const { payloadAsset, walletId } = action.payload;
       return state.map((wallet) => {
@@ -101,5 +113,13 @@ export const removeAssetToWallet = (walletId, asset, amount) => ({
       id: asset.id,
       amount: amount,
     },
+  },
+});
+
+export const updateNameToWallet = (walletId, name) => ({
+  type: "@wallet/updateName",
+  payload: {
+    walletId: walletId,
+    newName: name,
   },
 });
