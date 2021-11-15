@@ -18,7 +18,6 @@ import {
   WalletPage,
   Header,
   Balance,
-  NewTransaction,
   Assets,
   AssetItem,
   AssetInfo,
