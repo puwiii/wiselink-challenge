@@ -26,7 +26,9 @@ export const createTransaction = (walletId, type, coin, amount, price) => ({
     walletId: walletId,
     type: type,
     coin: {
-      ...coin,
+      image: coin.image,
+      name: coin.name,
+      id: coin.id,
     },
     amount: amount,
     price: price,
