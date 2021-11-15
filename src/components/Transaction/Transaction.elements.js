@@ -21,7 +21,7 @@ export const TransactionInfo = styled.div`
   flex-wrap: wrap;
   gap: 2em;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1280px) {
     display: flex;
   }
 `;
