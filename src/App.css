@@ -52,6 +52,7 @@ button > svg {
 
 button:hover {
   background-color: #28517799;
+  color: #fff;
 }
 
 input,
@@ -63,7 +64,7 @@ label {
 
 input {
   padding: 0.67em 1em;
-  font-size: 1rem;
+  font-size: 0.9rem;
   outline: none;
   border: none;
   background: #efefef;

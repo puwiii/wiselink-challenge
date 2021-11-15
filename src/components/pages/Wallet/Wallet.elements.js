@@ -69,7 +69,10 @@ export const Balance = styled.div`
   gap: 0.87em;
 `;
 
-export const NewTransaction = styled.button``;
+export const Button = styled.button`
+  background: ${({ isSecondary }) => isSecondary && "#28517722"};
+  color: ${({ isSecondary }) => isSecondary && "#000"};
+`;
 
 export const Assets = styled.section`
   display: grid;

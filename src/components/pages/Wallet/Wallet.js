@@ -6,6 +6,7 @@ import Price from "../../Atoms/Price";
 import NoData from "../../Atoms/NoData";
 
 import { AiOutlineSwap, AiOutlineRight } from "react-icons/ai";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
 import DocumentSVG from "../../svg/DocumentsSVG";
 import CryptoWorldSVG from "../../svg/CryptoWorldSVG";
@@ -25,6 +26,7 @@ import {
   WalletMain,
   WalletAside,
   CloseAside,
+  Button,
   Transactions,
 } from "./Wallet.elements";
 import Cryptocurrency from "../../Cryptocurrency/Cryptocurrency";
@@ -33,9 +35,13 @@ import { requests } from "../../../requests";
 import AddTransactionForm from "../../AddTransactionForm/AddTransactionForm";
 import Transaction from "../../Transaction/Transaction";
 import Spinner from "../../Spinner";
+import { useModal } from "../../../hooks/useModal";
+import UpdateNameWindow from "../../UpdateNameWindow/UpdateNameWindow";
 
 const Wallet = () => {
   const { id } = useParams();
+
+  const [isOpenUpdateName, openUpdateName, closeUpdateName] = useModal(false);
 
   const [wallet, setWallet] = useState(undefined);
   const [transactions, setTransactions] = useState(undefined);
@@ -104,7 +110,10 @@ const Wallet = () => {
               <Balance>
                 Saldo: <Price price={balance} />
               </Balance>
-              <NewTransaction
+              <Button onClick={() => openUpdateName()} isSecondary={true}>
+                <MdDriveFileRenameOutline /> Cambiar nombre
+              </Button>
+              <Button
                 onClick={(e) => {
                   e.preventDefault();
                   setShowTransaction(true);
@@ -112,7 +121,7 @@ const Wallet = () => {
               >
                 <AiOutlineSwap />
                 Realizar Transferencia
-              </NewTransaction>
+              </Button>
             </Header>
 
             <Subtitle>Activos</Subtitle>
@@ -180,6 +189,10 @@ const Wallet = () => {
         </SpinnerContainer>
       ) : (
         <Title>Wallet no encontrada</Title>
+      )}
+
+      {isOpenUpdateName && (
+        <UpdateNameWindow closeWindow={closeUpdateName} idWallet={wallet.id} />
       )}
     </WalletPage>
   );
